@@ -1,25 +1,25 @@
 ---
 layout: post
-title: What is programming, with pictures!
+title: What is programming, with pictures?
 ---
 
 
 Before reading this, install Dr Racket and set the language to "Beginner Student".
 
-## Introduction to programming!
+## Introduction to programming
 
 Coding is a way to tell the computer what to do. Computers are very stupid, so we have to be very specific in the instructions we give. This little introduction will show you how easy it is to make a simple animation.
 
 
 
 ## Programming Basics
-Everything is a function! You already know a bunch of functions without even knowing you know. Plus is a function, and so is minus!. So let's see how these "functions" work.
+Everything is a function! You already know a bunch of functions without even knowing you know. Plus is a function, and so is minus! So let's see how these "functions" work.
 
-If you haven't already open Dr Racket and set the language to "Beginning Student".
+If you haven't already, open Dr Racket and set the language to "Beginning Student".
 
 The screen is divided into two sections. The bottom section has a little arrow ">" which you can type next to. This is a place where you can write code to be immediately read by the computer.
 
-Type the following next to the arrow, `(+ 2 1)` and press enter. You should get something similar to what's shown below.
+Type the following next to the arrow, `(+ 2 1)` and press enter (Make sure you include the brackets and spacing). You should get something similar to what's shown below.
 
 ```
 > (+ 2 1)
@@ -41,7 +41,7 @@ Try to guess how these work while you type them in.
 
 But computers are awesome and can do a lot more than just maths. Especially because people have written functions for us to use to do amazing things!
 
-Before drawing pictures. Let's write some code in the top window. This panel lets us write larger programs. The code only runs when we click the green run arrow.
+Before drawing pictures, let's write some code in the top window. This panel lets us write larger programs. This code only runs when we click the green run arrow.
 
 Type the following into the top area. Try to guess what's going to happen when you click *Run*.
 
@@ -65,21 +65,14 @@ Finally it's time for cats!
 
 ## Let's draw some pictures.
 
-The first thing we must do is *import functions that let us draw*. This is really easy. At the top of your code window type:
-
-```
-(require 2htdp/image)
-```
-
-From now on I'll leave out the `(require 2htdp/image)` from examples. Make sure it's at the top of your file though!
-
-
 
 This is a very special kind of text editor. You can copy images into it!
 ![Little Cartoon Cat]({{ site.baseurl }}/images/p1/p1_little_cartoon_cat.jpg)
-![Small Mouse]({{ site.baseurl }}/images/p1/p1_little_mouse.png)
+![Small Mouse]({{ site.baseurl }}/images/p1/p1_little_mouse.jpg)
 
-Let's put this cat into a scene! Before we can use images we need to import the functions.
+Let's put this cat into a scene!
+
+The first thing we must do is *import functions that let us draw*.
 
 In the top window, as the first line of your code write the following:
 
@@ -118,7 +111,7 @@ Let's define our cat and mouse images. This lets us use the word *CAT* or *MOUSE
 
 (define CAT ![Little Cartoon Cat]({{ site.baseurl }}/images/p1/p1_little_cartoon_cat.jpg))
 
-(define MOUSE ![Small Mouse]({{ site.baseurl }}/images/p1/p1_little_mouse.png))
+(define MOUSE ![Small Mouse]({{ site.baseurl }}/images/p1/p1_little_mouse.jpg))
 
 ```
 (place-image MOUSE 50 100
@@ -145,13 +138,6 @@ Let's modify the code to turn it into a function.
                (place-image CAT 100 70 (empty-scene 200 140))))
 ```
 
-Let's remove the place-image code so we can focus on what was added.
-
-```
-(define (draw-cat-mouse-scene x-mouse)
-  ...
-  )
-```
 
 We have given our block of code a name. The name we gave it is *"draw-cat-mouse-scene"*. We also gave it a single argument *"x-mouse"*.
 Notice that within the code we changed the X position of the mouse to the *"x-mouse"*.
