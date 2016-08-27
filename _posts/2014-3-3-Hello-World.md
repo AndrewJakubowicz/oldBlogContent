@@ -1,6 +1,6 @@
 ---
 layout: post
-title: What is programming, with pictures?
+title: Taste of programming with pictures
 ---
 
 
