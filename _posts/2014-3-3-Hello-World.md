@@ -3,6 +3,7 @@ layout: post
 title: Taste of programming with pictures
 ---
 
+![cat and mouse on scene]({{ site.baseurl }}/images/p1/cat_and_mouse.png)
 
 Before reading this, install [Dr Racket](https://download.racket-lang.org/) and set the language to "Beginner Student".
 
