@@ -4,7 +4,7 @@ title: Taste of programming with pictures
 ---
 
 
-Before reading this, install Dr Racket and set the language to "Beginner Student".
+Before reading this, install [Dr Racket](https://download.racket-lang.org/) and set the language to "Beginner Student".
 
 ## Introduction to programming
 
@@ -19,7 +19,7 @@ If you haven't already, open Dr Racket and set the language to "Beginning Studen
 
 The screen is divided into two sections. The bottom section has a little arrow ">" which you can type next to. This is a place where you can write code to be immediately read by the computer.
 
-Type the following next to the arrow, `(+ 2 1)` and press enter (Make sure you include the brackets and spacing). You should get something similar to what's shown below.
+Type the following next to the arrow, `(+ 2 1)` and press enter (make sure you include the brackets and spacing). You should get something similar to what's shown below.
 
 ```
 > (+ 2 1)
@@ -59,11 +59,11 @@ This is easier seen so I've written out the steps below.
 (+ 3 2 10)
 15
 ```
-Finally it's time for cats!
+Finally, it's time for cats!
 
 > Note: If you ever want to look at a function in more detail. Click on it, and press *F1*. This will open documentation for it.
 
-## Let's draw some pictures.
+## Let's draw some pictures
 
 
 This is a very special kind of text editor. You can copy images into it!
