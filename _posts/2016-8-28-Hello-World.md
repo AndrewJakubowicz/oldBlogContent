@@ -62,7 +62,7 @@ This is easier seen so I've written out the steps below.
 ```
 Finally, it's time for cats!
 
-> Note: If you ever want to look at a function in more detail. Click on it, and press *F1*. This will open documentation for it.
+> Note: If you ever want to look at a function in more detail. Click on the function name, and press *F1*. This will open documentation for it.
 
 ## Let's draw some pictures
 
@@ -109,6 +109,8 @@ The top left corner of the screen has an X value of 0 and a Y value of 0. Travel
 
 Let's define our cat and mouse images. This lets us use the word *CAT* or *MOUSE* in the code to refer to the different pictures.
 
+Type in all the code below:
+
 
 (define CAT ![Little Cartoon Cat]({{ site.baseurl }}/images/p1/p1_little_cartoon_cat.jpg))
 
@@ -124,6 +126,11 @@ When you run your code you should see your cat and mouse staring lovingly at eac
 ![cat and mouse on scene]({{ site.baseurl }}/images/p1/cat_and_mouse.png)
 
 This is not quite animated yet, but we've done almost all the work.
+
+Note that we define CAT with the image of a cat, using another function called *define*.
+
+> Have you noticed that Racket functions take a general form: (function-name input1 input2 input3 ...)
+
 
 ## Functions bring life
 
@@ -173,7 +180,7 @@ We are abusing the fact that the mouse starts at an X position 0, and moves in a
 
 ### Resources
 
-Cartoon animals
+Cartoon animals gathered from:
 
 - [Cat](http://cliparts.co/clipart/3608707)
 - [Mouse](http://cliparts.co/clipart/5908)
