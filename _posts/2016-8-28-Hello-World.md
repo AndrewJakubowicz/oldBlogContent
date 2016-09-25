@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Taste of programming with pictures
+title: A Taste of Programming with Pictures
 ---
 
 ![cat and mouse on scene]({{ site.baseurl }}/images/p1/cat_and_mouse.png)

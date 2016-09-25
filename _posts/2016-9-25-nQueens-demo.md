@@ -1,11 +1,11 @@
 ---
 layout: post
-title: N-queens problem backtracking animation
+title: N-queens Problem Backtracking Animation
 myjs:
   - nQueens.js
 ---
 
-A cool example of how a backtracking algorithm searches for a solution to a problem.
+A visualization and explanation of how a backtracking algorithm searches for a solution to a problem.
 
 <div style="display:block; width:400px; height: 400px; margin:0 auto;" id="canvas-nqueens">
   <canvas id="nQueens-canvas"></canvas>
