@@ -3,16 +3,17 @@
 
 function drawGrid(ctx:CanvasRenderingContext2D, width:number, height:number, cells: number):void{
     let squareWidth: number = width / cells;
-    ctx.strokeStyle = "black";
-    for (let i = 0; i <= cells; i++){
-        ctx.moveTo(0,i * squareWidth);
-        ctx.lineTo(width, i * squareWidth);
+    for (let i = 0; i < cells; i ++){
+        for (let j = 0; j < cells; j ++){
+            if ((j + i) % 2 == 0){
+                ctx.fillStyle = "#C6C6C6";
+            } else {
+                ctx.fillStyle = "#E8E8E8";
+            }
+            ctx.fillRect(i*squareWidth, j*squareWidth, squareWidth, squareWidth);
+        }
+        
     }
-    for (let i = 0; i <= cells; i ++){
-        ctx.moveTo(i* squareWidth, 0);
-        ctx.lineTo(i * squareWidth, height);
-    }
-    ctx.stroke();
 }
 
 // creates a canvas and appends it to the page
@@ -28,7 +29,10 @@ function createCanvas(width: number, height: number, divId: string): CanvasRende
     canv.width = width;
     
     stage.appendChild(canv);
-    return canv.getContext('2d');
+
+    let context = canv.getContext('2d');
+    drawGrid(context, width, height, 5);
+    return context
 }
 
 
@@ -75,12 +79,9 @@ function nQueens(){
 function drawQueens(context: CanvasRenderingContext2D, currentSol:string, size: number){
     var drawCircle = function(centerX, centerY){
         context.beginPath();
-        context.arc(centerX, centerY, size/2, 0, 2 * Math.PI, false);
-        context.fillStyle = 'green';
+        context.arc(centerX, centerY, size/2.2, 0, 2 * Math.PI, false);
+        context.fillStyle = '#8594A8';
         context.fill();
-        context.lineWidth = 5;
-        context.strokeStyle = '#003300';
-        context.stroke();
         context.closePath();
     };
     let offset = size / 2;
@@ -127,7 +128,6 @@ function initGameLoop(ctx: CanvasRenderingContext2D, side, n, animationNumber: n
             }
             
             if (correctSolution) {
-                console.log("A solution: "+ solution);
                 isDone = true;
                 storedSolution = solution;
             }
@@ -146,7 +146,7 @@ function reset(){
     let ctx = createCanvas(side, side, "canvas-nqueens");
     let nInput = <HTMLInputElement>document.getElementById("nQueens-n");
     let n = parseInt(nInput.value);
-    if (n < 4){
+    if (n < 4 || !n){
         n = 4;
     } else if (n > 10){
         n = 10;
@@ -163,4 +163,10 @@ let submitButton = document.getElementById("btn-submit");
 submitButton.addEventListener("click", ()=> {
     reset();
 });
+
+// Just run this once to get a nice board.
+(() => {
+    let side = 400;
+    let ctx = createCanvas(side, side, "canvas-nqueens");
+})();
 
