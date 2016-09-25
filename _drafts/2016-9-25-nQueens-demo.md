@@ -1,6 +1,6 @@
 ---
 layout: post
-title: N Queens
+title: nQueens demo
 myjs:
   - nqueens.js
 ---
