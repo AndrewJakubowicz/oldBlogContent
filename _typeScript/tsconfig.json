@@ -2,7 +2,7 @@
 {
     "compileOnSave": true,
     "compilerOptions": {
-        "outDir": "../myjs/",
+        "outDir": "../_myjs/",
         "target": "es6",
         "watch": true
     }

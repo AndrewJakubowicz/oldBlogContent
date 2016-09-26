@@ -14,7 +14,7 @@ layout: default
   </div>
 
   {% for js in page.myjs %}
-     <script src="/myjs/{{ js }}" type="text/javascript"></script>
+     <script src="/{{ js }}" type="text/javascript"></script>
   {% endfor %}
 
   {% include disqus.html %}

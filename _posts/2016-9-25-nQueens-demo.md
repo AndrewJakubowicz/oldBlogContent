@@ -2,7 +2,8 @@
 layout: post
 title: N-queens Problem Backtracking Animation
 myjs:
-  - nQueens.js
+  - libjs/polyfill.js
+  - myjs/nQueens.js
 ---
 
 A visualization and explanation of how a backtracking algorithm searches for a solution to a problem.
