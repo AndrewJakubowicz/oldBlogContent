@@ -13,7 +13,7 @@ A visualization and explanation of how a backtracking algorithm searches for a s
 </div>
 <label for="nQueens-n">Number of Queens:</label>
 <input id="nQueens-n" type="number">
-<button id="btn-submit">Submit</button>
+<button id="btn-submit">Play Animation</button>
 
 **For performance reasons n is bound between 4 and 10.**
 
