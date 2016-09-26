@@ -17,7 +17,7 @@ A visualization and explanation of how a backtracking algorithm searches for a s
 
 **For performance reasons n is bound between 4 and 10.**
 
-*Note: Will only work on es6 supported browsers. Tested on Chrome.*
+*Note: Requires canvas supported browser. Tested on Chrome, Safari, Edge, Firefox.*
 
 ## N-queens problem
 
