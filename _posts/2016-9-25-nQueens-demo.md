@@ -1,6 +1,7 @@
 ---
 layout: post
 title: N-queens Problem Backtracking Animation
+thumbnail: images/p1/cat_and_mouse.png
 myjs:
   - libjs/polyfill.js
   - myjs/nQueens.js
