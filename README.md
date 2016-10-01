@@ -1,5 +1,5 @@
 ## Personal blog
-This is the repository of my blog.
+Andrew Jakubowicz's personal blog.
 
 
 ## Pipeline of files.
@@ -8,7 +8,11 @@ Then babel is run on it and it's moved to myjs.
 
 I'm a beginner at this sort of stuff so if anyone has advice on how to make the typescript file get compiled twice, straight into 'myjs', i'd be very thankful.
 
+## libjs
+This is where any js libraries go that might need to be loaded into a page.
 
+## myjs
+Where blogs js files go.
 
 ## Jekyll Now
 
