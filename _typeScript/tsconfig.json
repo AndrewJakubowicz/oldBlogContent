@@ -4,6 +4,15 @@
     "compilerOptions": {
         "outDir": "../_myjs/",
         "target": "es6",
+        "module": "commonjs",
+        "emitDecoratorMetadata": true,
+        "experimentalDecorators": true,
+        "sourceMap": true,
+        "removeComments": false,
+        "declaration": true,
         "watch": true
-    }
+    },
+    "exclude": [
+        "node_modules"
+    ]
 }
