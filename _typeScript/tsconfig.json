@@ -5,11 +5,11 @@
         "outDir": "../_myjs/",
         "target": "es6",
         "module": "commonjs",
-        "emitDecoratorMetadata": true,
-        "experimentalDecorators": true,
-        "sourceMap": true,
+        "emitDecoratorMetadata": false,
+        "experimentalDecorators": false,
+        "sourceMap": false,
         "removeComments": false,
-        "declaration": true,
+        "declaration": false,
         "watch": true
     },
     "exclude": [
