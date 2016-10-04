@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>N-queens Problem Backtracking Animation – Andrew Jakubowicz – Software Engineering Student</title>
+
+        <meta charset="utf-8" />
+    <meta content='text/html; charset=utf-8' http-equiv='Content-Type'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0'>
+
+    
+    <meta name="description" content="A visualization and explanation of how a backtracking algorithm searches for a solution to a problem.
+
+" />
+    <meta property="og:description" content="A visualization and explanation of how a backtracking algorithm searches for a solution to a problem.
+
+" />
+    
+    <meta name="author" content="Andrew Jakubowicz" />
+
+    
+    <meta property="og:title" content="N-queens Problem Backtracking Animation" />
+    <meta property="twitter:title" content="N-queens Problem Backtracking Animation" />
+    
+
+    
+    <meta name="twitter:image" content="http://spyr1014.github.io/images/p1/cat_and_mouse.png" />
+    <meta property="og:image" content="http://spyr1014.github.io/images/p1/cat_and_mouse.png" />
+    
+    
+
+    <!--[if lt IE 9]>
+      <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <link rel="stylesheet" type="text/css" href="/style.css" />
+    <link rel="alternate" type="application/rss+xml" title="Andrew Jakubowicz - Software Engineering Student" href="/feed.xml" />
+
+    <!-- Created with Jekyll Now - http://github.com/barryclark/jekyll-now -->
+  </head>
+
+  <body>
+    <div class="wrapper-masthead">
+      <div class="container">
+        <header class="masthead clearfix">
+          <a href="/" class="site-avatar"><img src="https://avatars1.githubusercontent.com/u/15080861?v=3&u=07df052d7ca6f63491846a887a757ab1c66aa318&s=140" /></a>
+
+          <div class="site-info">
+            <h1 class="site-name"><a href="/">Andrew Jakubowicz</a></h1>
+            <p class="site-description">Software Engineering Student</p>
+          </div>
+
+          <nav>
+            <a href="/">Blog</a>
+            <a href="/about">About</a>
+          </nav>
+        </header>
+      </div>
+    </div>
+
+    <div id="main" role="main" class="container">
+      <article class="post">
+  <h1>N-queens Problem Backtracking Animation</h1>
+
+  <div class="entry">
+    <p>A visualization and explanation of how a backtracking algorithm searches for a solution to a problem.</p>
+
+<div style="display:block; width:400px; height: 400px; margin:0 auto;" id="canvas-nqueens">
+  <canvas id="nQueens-canvas"></canvas>
+</div>
+<p><label for="nQueens-n">Number of Queens:</label>
+<input id="nQueens-n" type="number" />
+<button id="btn-submit">Play Animation</button></p>
+
+<p><strong>For performance reasons n is bound between 4 and 10.</strong></p>
+
+<p><em>Note: Requires canvas supported browser. Tested on Chrome, Safari, Edge, Firefox.</em></p>
+
+<h2 id="n-queens-problem">N-queens problem</h2>
+
+<p>If I have a chessboard of width and length <strong>n</strong> where <strong>n</strong> is a number.</p>
+
+<p>How can <strong>n</strong> queens be placed so that none of the queens are attacking one another?</p>
+
+<p><a href="http://www.hbmeyer.de/backtrack/achtdamen/eight.htm">Try it yourself here with 8 queens.</a></p>
+
+<h2 id="what-would-the-algorithm-do-without-backtracking">What would the algorithm do without backtracking?</h2>
+
+<p>Without backtracking a program would place <em>all n queens</em> before checking if any queens are attacking.
+This leads to wasteful solutions such as an entire row of queens.</p>
+
+<p>We don’t need a whole row full of queens before we know that the solution failed.
+Instead we only need 2 queens to be attacking each other to know that the solution is wrong.</p>
+
+<h2 id="introducing-backtracking">Introducing backtracking</h2>
+
+<p>A backtracking algorithm is a way of computing a solution to a problem when constraints are known.</p>
+
+<p>The algorithm places one queen at a time.
+If the queen placed is attacking another queen, the queen is removed and we try again in the next position.
+This is the <em>backtracking</em> step.</p>
+
+<p>If you want to see this in action. Run the animation and look for the queens being taken off the board.
+This is obvious when solving for 10 queens.</p>
+
+<p><a href="https://en.wikipedia.org/wiki/Backtracking">For more detail check out the wiki page on backtracking.</a></p>
+
+
+  </div>
+
+  <div class="date">
+    Written on September 25, 2016
+  </div>
+
+  
+     <script src="/libjs/polyfill.js" type="text/javascript"></script>
+  
+     <script src="/myjs/nQueens.js" type="text/javascript"></script>
+  
+
+  
+
+  
+<div class="comments">
+	<div id="disqus_thread"></div>
+	<script type="text/javascript">
+
+	    var disqus_shortname = 'spyr1014-blog';
+
+	    (function() {
+	        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+	        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+	        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+	    })();
+
+	</script>
+	<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+
+</article>
+
+    </div>
+
+    <div class="wrapper-footer">
+      <div class="container">
+        <footer class="footer">
+          
+<a href="mailto:spyr1014@gmail.com"><i class="svg-icon email"></i></a>
+
+
+<a href="https://github.com/SpyR1014"><i class="svg-icon github"></i></a>
+
+
+
+
+<a href="https://www.twitter.com/spyr1014"><i class="svg-icon twitter"></i></a>
+
+
+
+        </footer>
+      </div>
+    </div>
+
+    
+	<!-- Google Analytics -->
+	<script>
+		(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+		(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+		m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+		})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+		ga('create', 'UA-85014358-1', 'auto');
+		ga('send', 'pageview', {
+		  'page': '/nQueens-demo/',
+		  'title': 'N-queens Problem Backtracking Animation'
+		});
+	</script>
+	<!-- End Google Analytics -->
+
+
+  </body>
+</html>
