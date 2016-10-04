@@ -14,7 +14,10 @@ I wrote this up as a refresher for myself. This is not meant to be indepth and i
 
 
 ### Contents
+  
+  - <s>First order ODEs</s>
   - [Linear Second order ODEs]({% post_url 2016-10-3-odenotes %}#linear-second-order-odes)
+  - <s>Laplace Transforms</s>
 
 ## Linear Second order ODEs
 
