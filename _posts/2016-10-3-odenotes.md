@@ -2,10 +2,10 @@
 layout: post
 title: Ways to solve simple Ordinary Differential Equations (ODEs)
 thumbnail: images/p1/cat_and_mouse.png
-loadMathjax: true
 myjs:
   - libjs/anchor.min.js
   - myjs/anchor_init.js
+  - libjs/mathjax.js
 
 ---
 
