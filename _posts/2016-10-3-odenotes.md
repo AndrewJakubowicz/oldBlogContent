@@ -9,8 +9,6 @@ myjs:
 
 ---
 
-> Note: Currently I can't get the MathJax library to work in production.
-> I'll fix this as soon as I have time.
 
 I wrote this up as a refresher for myself. This is not meant to be indepth and it barely scratches the surface of the topics presented.
 
