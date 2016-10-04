@@ -5,7 +5,7 @@ thumbnail: images/p1/cat_and_mouse.png
 myjs:
   - libjs/anchor.min.js
   - myjs/anchor_init.js
-  - libjs/mathjax.js
+  - libjs/MathJax/MathJax.js?config=TeX-MML-AM_CHTML
 
 ---
 
