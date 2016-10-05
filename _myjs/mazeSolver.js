@@ -40,34 +40,30 @@ function drawGrid(ctx, width, height, mazeString) {
         }
     }
 }
-function drawGridPlane(ctx, width, height, cells) {
-    let squareWidth = width / cells;
-    for (let i = 0; i < cells; i++) {
-        for (let j = 0; j < cells; j++) {
-            if ((j + i) % 2 == 0) {
-                ctx.fillStyle = "#C6C6C6";
-            }
-            else {
-                ctx.fillStyle = "#E8E8E8";
-            }
-            ctx.fillRect(i * squareWidth, j * squareWidth, squareWidth, squareWidth);
-        }
-    }
-}
 // Initiates the whole thing.
 // Global controllers
 let animationRunning = true;
 let globalState = {
-    userMaze: "######-###    \
-\n---------X    \
-\n---------#    \
-\n######-###    \
-\n#--#-----#    \
-\n#---##---#    \
-\n#---#--###    \
-\no-#------#    \
-\n---------#    \
-\n###-----##".split("\n").map((v) => { return v.trim().split(''); }),
+    userMaze: "######------###-----    \
+\n-------------------X    \
+\n--------------#    \
+\n#-----#####------###    \
+\n#-------#----------#    \
+\n#--------##--------#    \
+\n#--------#-------###    \
+\n#--------#-------###    \
+\n#--------#-------###    \
+\n#--------#-------###    \
+\n#--------#-------###    \
+\n#--------#-------###    \
+\n#--------#-------###    \
+\n#--------#-------###    \
+\n#--------#-------###    \
+\n#--------#-------###    \
+\n#--------#-------###    \
+\no-#--------#####---#    \
+\n--------#####------#    \
+\n###--#####--------##".split("\n").map((v) => { return v.trim().split(''); }),
     editorMode: false,
     mouseCood: [0, 0],
     mouseDownInterval: null,
@@ -75,7 +71,8 @@ let globalState = {
 };
 // Initiates everything
 let cvs = initCanvas("mazeSolver-canvas");
-gameLoop(cvs);
+// HARDCODED - initates first canvas drawing.
+drawGrid(cvs, 400, 400, globalState.userMaze);
 // Game loop of the file.
 function gameLoop(ctx) {
     // Grab maze from global object.
@@ -84,12 +81,12 @@ function gameLoop(ctx) {
     let width = 400;
     // Sets up the editor.
     let drawEditorMode = function () {
-        drawGrid(ctx, width, height, globalState.userMaze);
         // First check where the first mouseDown was.
         if (globalState.editState == "") {
             setEditorState(width);
         }
         userUpdateMaze(width);
+        drawGrid(ctx, width, height, globalState.userMaze);
     };
     // Actual game loop. Here we choose who gets animated.
     if (globalState.editorMode) {
@@ -109,14 +106,17 @@ function gameLoop(ctx) {
                 requestAnimationFrame(drawEditorMode);
             }
             thisIteration = myIterator.next();
-            if (!thisIteration.done || animationRunning) {
+            if ((!thisIteration.done || animationRunning) && !(thisIteration.value == undefined)) {
                 let correctSolution = thisIteration.value[0];
                 let solution = thisIteration.value[1];
                 if (correctSolution) {
                     animationRunning = false;
-                    console.log("Animation stopped!");
                 }
                 drawGrid(ctx, width, height, solution);
+            }
+            else {
+                console.log("You blocked me in MATE!");
+                animationRunning = false;
             }
         };
         runningMaze();
@@ -129,6 +129,14 @@ function userUpdateMaze(sideLength) {
     let xIndex = mouse[0];
     let yIndex = mouse[1];
     // Currently do not allow users to change starting positions.
+    let tileMouseOver = globalState.userMaze[yIndex][xIndex];
+    if (tileMouseOver == 'o' || tileMouseOver == 'X' || globalState.editState == 'o' || globalState.editState == 'X') {
+        // GET OUT if over start or end.
+        return undefined;
+    }
+    else {
+        globalState.userMaze[yIndex][xIndex] = globalState.editState;
+    }
 }
 // Detects if you click on a wall, empty space, start/end
 // Enums would be awesome. Maybe in the future.
@@ -137,18 +145,20 @@ function setEditorState(sideLength) {
     let mouse = findIndex(sideLength);
     let xIndex = mouse[0];
     let yIndex = mouse[1];
-    globalState.editState = globalState.userMaze[yIndex][xIndex];
-    console.log("You clicked on:", globalState.editState);
+    let clickedOn = globalState.userMaze[yIndex][xIndex];
+    if (clickedOn == '#') {
+        globalState.editState = '-';
+    }
+    else {
+        globalState.editState = '#';
+    }
 }
 // Normalises the mouse position into an index that we can use.
 function findIndex(sideLength) {
     let squaresNumber = globalState.userMaze.length;
     let squareSideSize = sideLength / squaresNumber;
-    console.log("squares have side length of:", squareSideSize);
     let xIndex = Math.floor(globalState.mouseCood[0] / squareSideSize);
-    console.log("x index of: ", xIndex);
     let yIndex = Math.floor(globalState.mouseCood[1] / squareSideSize);
-    console.log("y index of: ", yIndex);
     return [xIndex, yIndex];
 }
 /* SolveMaze takes in a maze, that MUST BE A SQUARE.
@@ -164,7 +174,6 @@ function solveMaze(myMaze) {
     // Leave a trail of numbers that can increment with time!
     let recursiveSolver = function* (maze, currentPos) {
         // Check base case
-        console.log(maze.map((x) => { return x.join(''); }).join('\n'));
         let posRow = currentPos[0];
         let posCol = currentPos[1];
         if ((posRow < 0) || (posRow >= maze.length) || (posCol < 0) || (posCol >= maze.length)) {
@@ -188,10 +197,10 @@ function solveMaze(myMaze) {
                 // down [+1][0]
                 // left [0][-1]
                 // right [0][+1]
-                yield* recursiveSolver(maze.slice(), [posRow - 1, posCol]);
                 yield* recursiveSolver(maze.slice(), [posRow + 1, posCol]);
-                yield* recursiveSolver(maze.slice(), [posRow, posCol - 1]);
+                yield* recursiveSolver(maze.slice(), [posRow - 1, posCol]);
                 yield* recursiveSolver(maze.slice(), [posRow, posCol + 1]);
+                yield* recursiveSolver(maze.slice(), [posRow, posCol - 1]);
             }
             else {
                 console.log("You're probably standing on a number. Get out of here.");
@@ -214,8 +223,6 @@ function whileMouseDownOnCanvas(event) {
     // This causes a different frame to be loaded.
     globalState.editorMode = true;
     gameLoop(cvs);
-    // The mouse is down.
-    console.log("Mouse down at: ", globalState.mouseCood);
 }
 function mouseCaptureMove(event) {
     event = event || window.event;
@@ -225,7 +232,7 @@ function mouseCaptureMove(event) {
 }
 function mouseDownOnCanvas(event) {
     if (globalState.mouseDownInterval == null) {
-        globalState.mouseDownInterval = setInterval(whileMouseDownOnCanvas.bind(window, event), 100);
+        globalState.mouseDownInterval = setInterval(whileMouseDownOnCanvas.bind(window, event), 25);
     }
     globalState.editorMode = true;
     animationRunning = false;
