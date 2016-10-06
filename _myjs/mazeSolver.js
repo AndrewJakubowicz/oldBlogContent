@@ -40,6 +40,15 @@ function drawGrid(ctx, width, height, mazeString) {
         }
     }
 }
+function drawSolution(ctx, width, height) {
+    let solveBox;
+    ctx.fillStyle = "#00ff00";
+    let squareWidth = width / globalState.userMaze.length;
+    for (let i = 0; i < globalState.actualSolution.length; i++) {
+        solveBox = globalState.actualSolution[i];
+        ctx.fillRect(solveBox[1] * squareWidth, solveBox[0] * squareWidth, squareWidth, squareWidth);
+    }
+}
 // Initiates the whole thing.
 // Global controllers
 let animationRunning = true;
@@ -67,7 +76,8 @@ let globalState = {
     editorMode: false,
     mouseCood: [0, 0],
     mouseDownInterval: null,
-    editState: ""
+    editState: "",
+    actualSolution: []
 };
 // Initiates everything
 let cvs = initCanvas("mazeSolver-canvas");
@@ -107,6 +117,7 @@ function gameLoop(ctx) {
             }
             let thisIteration = myIterator.next();
             if ((!thisIteration.done || animationRunning) && !(thisIteration.value == undefined)) {
+                // Magic maze solving goes on here.
                 let correctSolution = thisIteration.value[0];
                 let solution = thisIteration.value[1];
                 if (correctSolution) {
@@ -114,6 +125,10 @@ function gameLoop(ctx) {
                 }
                 if (animationRunning) {
                     drawGrid(ctx, width, height, solution);
+                }
+                else {
+                    // this is the last frame of the animation.
+                    drawSolution(ctx, width, height);
                 }
             }
             else {
@@ -187,6 +202,7 @@ function solveMaze(myMaze) {
                 maze[posRow][posCol] = '1';
                 console.log("good job scotty.");
                 yield [true, maze];
+                yield [true, maze]; // Safety yield (because animation frames run 1 extra);
             }
             else if (maze[posRow][posCol] == '#') {
                 console.log("THis is a wall SHIT!");
@@ -199,15 +215,20 @@ function solveMaze(myMaze) {
                 // down [+1][0]
                 // left [0][-1]
                 // right [0][+1]
+                globalState.actualSolution.push([posRow + 1, posCol]);
                 yield* recursiveSolver(maze.slice(), [posRow + 1, posCol]);
+                globalState.actualSolution.push([posRow - 1, posCol]);
                 yield* recursiveSolver(maze.slice(), [posRow - 1, posCol]);
+                globalState.actualSolution.push([posRow, posCol + 1]);
                 yield* recursiveSolver(maze.slice(), [posRow, posCol + 1]);
+                globalState.actualSolution.push([posRow, posCol - 1]);
                 yield* recursiveSolver(maze.slice(), [posRow, posCol - 1]);
             }
             else {
                 console.log("You're probably standing on a number. Get out of here.");
             }
         }
+        let popped = globalState.actualSolution.pop(); // Throw out the garbage
     };
     // Find the start.
     let splitMaze = myMaze.split("\n");
