@@ -27,11 +27,11 @@ function drawGrid(ctx:CanvasRenderingContext2D, width:number, height:number, maz
     for (let i = 0; i < cells; i ++){
         for (let j = 0; j < cells; j ++){
             if (cellsSplit[j][i] == '#'){
-                ctx.fillStyle = "#C6C6C6";
+                ctx.fillStyle = "#636363";
             } else if (cellsSplit[j][i] == 'X') {
-                ctx.fillStyle = "#D490CB";
+                ctx.fillStyle = "#ff0000";
             } else if (cellsSplit[j][i] == 'o') {
-                ctx.fillStyle = "#90D499";
+                ctx.fillStyle = "#00ff00";
             } else if (isNumeric(cellsSplit[j][i])) {
                 ctx.fillStyle = "rgb(255,162," + ((Number(cellsSplit[j][i])) % 250).toString() + ")";
             } else {
