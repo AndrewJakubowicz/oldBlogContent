@@ -101,8 +101,7 @@ function gameLoop(ctx: CanvasRenderingContext2D):void{
     let height = 400;
     let width = 400;
 
-    // resets solution
-    globalState.actualSolution = [];
+    
     
 
     // Sets up the editor.
@@ -126,6 +125,9 @@ function gameLoop(ctx: CanvasRenderingContext2D):void{
         // Initial set up for the runningMaze.
         let myIterator = solveMaze(maze);
         let thisIteration;
+        
+        // resets solution
+        globalState.actualSolution = [];
 
         // Runs animation of solving.
         let runningMaze = function(){
