@@ -9,9 +9,10 @@ myjs:
 
 ---
 
-
-<canvas id="mazeSolver-canvas" style="margin: 0 auto"></canvas>
+<div style='width = 100%; text-align=center;'>
+<canvas id="mazeSolver-canvas" style="display=inline;">Your browser doesn't support canvas!</canvas>
 <button onclick="runAnimation()">SOLVE MAZE</button>
+</div>
 
 ## Instructions
 
@@ -25,38 +26,41 @@ myjs:
 
 ### States
 
-Something I really wanted to play with was a program with distinct states.
+I really wanted to play with a program with distinct states.
 
-I have a functional background and I've heard how global mutable states can bite you.
-This project has shown me that even with something extremely trivial with 3 states, can still start getting pretty messy.
+My functional programming brain was not impressed with my use of a global variable.
+I've learnt that a trivial program can become very messy once there are global mutable states.
+Mix that together with asynchronous programming...
+
 The three states are:
 
   - User editting
   - Animation playing
   - Solution playing
 
-Each state must be able to interrupt the other. (With the exception of the Animation and Solution interrupting editting.)
-
-I also wanted to seperate the animation of the solution as I wanted to play with easing.
-This tiny implementation of easing taught me so much.
+Solution animation was seperate to include easing.
+And wow easing is fun and not too challenging.
 
 ### Optimization
 
-I also ran into some very interesting optimization problems.
-These were mostly caused by the act of the user editting the maze.
-Editting the maze would run initialization code for the maze finding algorithm, or doing an expensive array allocation of empty arrays.
+Many funny lagging bugs were fixed.
+All were associated with getting a good user editting experience.
+Editting the maze would run initialization code for the maze finding algorithm, or do an expensive array allocation of empty arrays!!!
 
-Fixing these made the editor feel extremely responsive.
+Making code run _only_ when needed made for a fast program.
 
 
 ### Generators
 
-The algorithm is basically a simple backtracking implementation. However I can pause it using `yield` expressions.
-This allows the animation to call `requestAnimationFrame` at 60 fps, only grabbing the next change in the algorithm.
+The algorithm is basically a simple [backtracking implementation](https://en.wikipedia.org/wiki/Backtracking).
+Using generators I can pause it using `yield` expressions.
+Thus logic and timing is __separated__.
+
+This allows the animation to call `requestAnimationFrame` at 60 fps, only grabbing the next change in the algorithm when needed.
 I call `yield` every time the algorithm takes some kind of step. Hitting walls do not call `yield`.
 
 
-### But generators don't walk on all devices!
+### But generators don't work on all devices!
 
 In order to target older browsers I transpile the code twice.
 The code is written in __Typescript__. This is transpiled into __ECMAScript6__.
@@ -65,5 +69,8 @@ Finally I use __Babel__ and a generator polyfill to transpile the code into a fo
 
 ### Difficulty of mini-project
 
-The difficulty of the maze is tying all the small pieces together.
-Therefore I rate this project as: `MODERATE`.
+`MODERATE`
+
+  - Many small pieces
+  - Easy to get tangled
+  - Mouse drag script tricky
