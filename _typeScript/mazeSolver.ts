@@ -121,15 +121,17 @@ function gameLoop(ctx: CanvasRenderingContext2D):void{
                 requestAnimationFrame(drawEditorMode);
             }
 
-            thisIteration = myIterator.next();
-
+            let thisIteration = myIterator.next();
             if ((!thisIteration.done || animationRunning) && !(thisIteration.value == undefined)) {
                 let correctSolution = thisIteration.value[0];
                 let solution = thisIteration.value[1];
                 if (correctSolution){
                     animationRunning = false;
                 }
-                drawGrid(ctx, width, height, solution);
+                if (animationRunning){
+                    drawGrid(ctx, width, height, solution);
+                }
+                
             } else {
                 console.log("You blocked me in MATE!");
                 animationRunning = false;
