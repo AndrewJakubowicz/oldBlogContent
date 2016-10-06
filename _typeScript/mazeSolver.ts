@@ -100,6 +100,9 @@ function gameLoop(ctx: CanvasRenderingContext2D):void{
     let maze = globalState.userMaze.map((x)=>{return x.join('');}).join('\n');
     let height = 400;
     let width = 400;
+
+    // resets solution
+    globalState.actualSolution = [];
     
 
     // Sets up the editor.
