@@ -30,8 +30,8 @@ function drawGrid(ctx, width, height, mazeString) {
             else if (cellsSplit[j][i] == 'o') {
                 ctx.fillStyle = "#90D499";
             }
-            else if (cellsSplit[j][i] == '1') {
-                ctx.fillStyle = "#FF0000";
+            else if (isNumeric(cellsSplit[j][i])) {
+                ctx.fillStyle = "rgb(255,162," + ((Number(cellsSplit[j][i])) % 250).toString() + ")";
             }
             else {
                 ctx.fillStyle = "#E8E8E8";
@@ -42,42 +42,62 @@ function drawGrid(ctx, width, height, mazeString) {
 }
 function drawSolution(ctx, width, height) {
     let solveBox;
-    ctx.fillStyle = "#00ff00";
     let squareWidth = width / globalState.userMaze.length;
-    for (let i = 0; i < globalState.actualSolution.length; i++) {
-        solveBox = globalState.actualSolution[i];
-        ctx.fillRect(solveBox[1] * squareWidth, solveBox[0] * squareWidth, squareWidth, squareWidth);
+    let frameLength = 30;
+    let frame = 0;
+    let answerLength = globalState.actualSolution.length;
+    // Initiate drawing solution.
+    globalState.drawingSolution = true;
+    var drawSolution = function () {
+        if (globalState.actualSolution.length != 0 && globalState.drawingSolution) {
+            requestAnimationFrame(drawSolution);
+            while (globalState.actualSolution.length != 0 && globalState.actualSolution.length / answerLength > (1 - animationEase("linear", frameLength, frame))) {
+                solveBox = globalState.actualSolution.pop();
+                ctx.fillStyle = "rgb(" + (Number(frame) * 8 % 250).toString() + ",162,255)";
+                ctx.fillRect(solveBox[1] * squareWidth, solveBox[0] * squareWidth, squareWidth, squareWidth);
+            }
+            frame++;
+            if (globalState.actualSolution.length == 0) {
+                globalState.drawingSolution = false;
+            }
+        }
+        else {
+            globalState.drawingSolution = false;
+        }
+    };
+    drawSolution();
+}
+// This will get you your animation moment. Wherever you are.
+// Returns a float, shows distance between 0 and 1.
+function animationEase(type, frameLength, frame) {
+    let y;
+    let t = frame / frameLength;
+    if (type /* == "linear" */) {
+        // y = mx + c (m = 0, c = 0)
+        // y = scrubPosition
+        // Smooth function
+        y = -t * (t - 2);
     }
+    // This makes sure that we cap the animation at 1.
+    if (y > 1) {
+        return 1;
+    }
+    else if (y < 0) {
+        return 0;
+    }
+    return y;
 }
 // Initiates the whole thing.
 // Global controllers
 let animationRunning = true;
 let globalState = {
-    userMaze: "######------###-----    \
-\n-------------------X    \
-\n--------------#    \
-\n#-----#####------###    \
-\n#-------#----------#    \
-\n#--------##--------#    \
-\n#--------#-------###    \
-\n#--------#-------###    \
-\n#--------#-------###    \
-\n#--------#-------###    \
-\n#--------#-------###    \
-\n#--------#-------###    \
-\n#--------#-------###    \
-\n#--------#-------###    \
-\n#--------#-------###    \
-\n#--------#-------###    \
-\n#--------#-------###    \
-\no-#--------#####---#    \
-\n--------#####------#    \
-\n###--#####--------##".split("\n").map((v) => { return v.trim().split(''); }),
+    userMaze: "#######-----###-----w------#------------Xw------#------------#w#-----#####-########w#-------#----------#w#-#####-########---#w#-#---#-#-#------###w#-#-#-#-#-#-##-#####w#-#-#-#-#-#------###w#-#-#-#-#-######-###w#-#-#-#-#-#------###w#-#-#-#-#-#-########w#-#-#-#-#-#------###w#-#-#-#-#-######-###w#-#-#-#-#-#------###w#-#-#-#-#-#-########w#-#-#-#-#-#------###wo-#-###----#####---#w--------##-##------#w###--####---------##".split("w").map((v) => { return v.trim().split(''); }),
     editorMode: false,
     mouseCood: [0, 0],
     mouseDownInterval: null,
     editState: "",
-    actualSolution: []
+    actualSolution: [],
+    drawingSolution: false
 };
 // Initiates everything
 let cvs = initCanvas("mazeSolver-canvas");
@@ -128,13 +148,13 @@ function gameLoop(ctx) {
                 if (animationRunning) {
                     drawGrid(ctx, width, height, solution);
                 }
-                else {
+                else if (!globalState.editorMode) {
                     // this is the last frame of the animation.
                     drawSolution(ctx, width, height);
                 }
             }
             else {
-                console.log("You blocked me in MATE!");
+                // console.log("You blocked me in MATE!");
                 animationRunning = false;
             }
         };
@@ -156,6 +176,21 @@ function userUpdateMaze(sideLength) {
     else {
         globalState.userMaze[yIndex][xIndex] = globalState.editState;
     }
+}
+function isNumeric(n) {
+    return !isNaN(parseFloat(n)) && isFinite(n);
+}
+function updateMazeNumbers(mazeToUpdate) {
+    let updateNum;
+    for (let i = 0; i < mazeToUpdate.length; i++) {
+        for (let j = 0; j < mazeToUpdate.length; j++) {
+            if (isNumeric(mazeToUpdate[i][j])) {
+                updateNum = parseFloat(mazeToUpdate[i][j]) + 1;
+                mazeToUpdate[i][j] = String(updateNum);
+            }
+        }
+    }
+    return mazeToUpdate;
 }
 // Detects if you click on a wall, empty space, start/end
 // Enums would be awesome. Maybe in the future.
@@ -188,6 +223,7 @@ function findIndex(sideLength) {
  *  # = walls.
  *  - = empty spaces.
  *  The maze will not go off the edge.
+ * SIDE EFFECTS: plays with globalState object.
 */
 function solveMaze(myMaze) {
     // Leave a trail of numbers that can increment with time!
@@ -196,38 +232,37 @@ function solveMaze(myMaze) {
         let posRow = currentPos[0];
         let posCol = currentPos[1];
         if ((posRow < 0) || (posRow >= maze.length) || (posCol < 0) || (posCol >= maze.length)) {
-            // Do nothing again.
-            console.log("Falling off map! EEEK!");
         }
         else {
             if (maze[posRow][posCol] == 'X') {
                 maze[posRow][posCol] = '1';
-                console.log("good job scotty.");
+                // console.log("good job scotty.")
                 yield [true, maze];
                 yield [true, maze]; // Safety yield (because animation frames run 1 extra);
             }
             else if (maze[posRow][posCol] == '#') {
-                console.log("THis is a wall SHIT!");
             }
             else if ((maze[posRow][posCol] == '-') || (maze[posRow][posCol] == 'o')) {
                 // We can travel now.
                 maze[posRow][posCol] = '1';
-                yield [false, maze];
+                // Here I would like to update the entire maze to get the color effects.
+                let updatedMaze = updateMazeNumbers(maze);
+                console.log(updatedMaze);
+                yield [false, updatedMaze];
                 // to go up [-1][0]
                 // down [+1][0]
                 // left [0][-1]
                 // right [0][+1]
                 globalState.actualSolution.push([posRow + 1, posCol]);
-                yield* recursiveSolver(maze.slice(), [posRow + 1, posCol]);
+                yield* recursiveSolver(updatedMaze.slice(), [posRow + 1, posCol]);
                 globalState.actualSolution.push([posRow - 1, posCol]);
-                yield* recursiveSolver(maze.slice(), [posRow - 1, posCol]);
+                yield* recursiveSolver(updatedMaze.slice(), [posRow - 1, posCol]);
                 globalState.actualSolution.push([posRow, posCol + 1]);
-                yield* recursiveSolver(maze.slice(), [posRow, posCol + 1]);
+                yield* recursiveSolver(updatedMaze.slice(), [posRow, posCol + 1]);
                 globalState.actualSolution.push([posRow, posCol - 1]);
-                yield* recursiveSolver(maze.slice(), [posRow, posCol - 1]);
+                yield* recursiveSolver(updatedMaze.slice(), [posRow, posCol - 1]);
             }
             else {
-                console.log("You're probably standing on a number. Get out of here.");
             }
         }
         let popped = globalState.actualSolution.pop(); // Throw out the garbage
@@ -261,6 +296,7 @@ function mouseDownOnCanvas(event) {
     }
     globalState.editorMode = true;
     animationRunning = false;
+    globalState.drawingSolution = false;
     gameLoop(cvs);
 }
 function mouseUpOnCanvas(event) {
