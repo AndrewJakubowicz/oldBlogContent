@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Maze Solver Demo
+title: Interactive Maze Solver Animation/Algorithm
 thumbnail: images/p1/cat_and_mouse.png
 
 myjs:
@@ -8,6 +8,7 @@ myjs:
   - libjs/polyfill.js
 
 ---
+<!-- more -->
 
 <div style='width:100%; text-align:center;'>
 <canvas id="mazeSolver-canvas" style="display:inline-block;background-color:#212121;padding:3px;">Your browser doesn't support canvas!</canvas>
