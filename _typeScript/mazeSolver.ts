@@ -35,7 +35,7 @@ function drawGrid(ctx:CanvasRenderingContext2D, width:number, height:number, maz
             } else if (isNumeric(cellsSplit[j][i])) {
                 ctx.fillStyle = "rgb(255,162," + ((Number(cellsSplit[j][i])) % 250).toString() + ")";
             } else {
-                ctx.fillStyle = "#E8E8E8";
+                ctx.fillStyle = "#efefef";
             }
             ctx.fillRect(i*squareWidth, j*squareWidth, squareWidth, squareWidth);
         }
