@@ -280,7 +280,6 @@ function solveMaze(myMaze) {
                         // Here I would like to update the entire maze to get the color effects.
                         updatedMaze = updateMazeNumbers(maze);
 
-                        console.log(updatedMaze);
                         _context.next = 22;
                         return [false, updatedMaze];
 
