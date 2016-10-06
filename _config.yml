@@ -86,7 +86,3 @@ exclude:
   - CNAME
   - node_modules
   - _typeScript
-
-
-include:
-  - _myjs

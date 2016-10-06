@@ -4,7 +4,8 @@ title: Maze Solver Demo
 thumbnail: images/p1/cat_and_mouse.png
 
 myjs:
-  - _myjs/mazeSolver.js
+  - myjs/mazeSolver.js
+  - libjs/polyfill.js
 
 ---
 
