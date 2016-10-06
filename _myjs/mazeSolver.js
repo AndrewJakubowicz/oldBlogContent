@@ -89,6 +89,8 @@ function gameLoop(ctx) {
     let maze = globalState.userMaze.map((x) => { return x.join(''); }).join('\n');
     let height = 400;
     let width = 400;
+    // resets solution
+    globalState.actualSolution = [];
     // Sets up the editor.
     let drawEditorMode = function () {
         // First check where the first mouseDown was.
