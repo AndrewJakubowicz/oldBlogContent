@@ -9,7 +9,7 @@ function initCanvas(canvasID) {
     canvas.addEventListener("mouseleave", mouseUpOnCanvas);
     return canvas.getContext('2d');
 }
-//Also clear the interval when user leaves the window with mouse
+// Also clear the interval when user leaves the window with mouse
 document.addEventListener("mouseout", mouseUpOnCanvas);
 document.addEventListener("mouseup", mouseUpOnCanvas);
 document.addEventListener("mousemove", mouseCaptureMove);
@@ -40,6 +40,9 @@ function drawGrid(ctx, width, height, mazeString) {
         }
     }
 }
+// drawSolution, draws the solution onto the map.
+// It uses the global variable globalState.
+// Takes the canvas context, width and height.
 function drawSolution(ctx, width, height) {
     let solveBox;
     let squareWidth = width / globalState.userMaze.length;
