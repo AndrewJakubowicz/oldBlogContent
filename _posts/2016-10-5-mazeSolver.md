@@ -8,7 +8,15 @@ myjs:
   - libjs/polyfill.js
 
 ---
+
+<img id="hideThis" src="/images/p1/maze-post.gif">
+
 <!-- more -->
+
+<!--This hides the thumbnail-->
+<script async>
+document.getElementById("hideThis").style.display = "none";
+</script>
 
 <div style='width:100%; text-align:center;'>
 <canvas id="mazeSolver-canvas" style="display:inline-block;background-color:#212121;padding:3px;">Your browser doesn't support canvas!</canvas>
