@@ -17,7 +17,7 @@ I wrote this up as a refresher for myself. This is not meant to be indepth and i
   
   - <s>First order ODEs</s>
   - [Linear Second order ODEs]({% post_url 2016-10-3-odenotes %}#linear-second-order-odes)
-  - <s>Laplace Transforms</s>
+  - <s>Laplace Transforms - Technique</s>
 
 ## Linear Second order ODEs
 
@@ -134,6 +134,10 @@ and then solve for the constants in your guess.
   $$ay''_p(x) + by'_p(x) + cy_p(x) = S(x)$$
 </div>
 
+Now you have your answer for <span>$$y_p(x)$$</span> and you can add it to your homogeneous equation in order to find the general solution.
 
-With your wonderful non-homogeneous equation solved, you can now simply add it to the homogeneous solution to find the general equation.
 Your answer will still have constants and these can be worked out with given initial values.
+
+
+## Laplace Transforms - Technique
+
