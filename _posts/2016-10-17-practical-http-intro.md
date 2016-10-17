@@ -39,7 +39,7 @@ Here are 2 practical ways you can start sending requests ("letters to servers").
 Anything starting with `>` is your HTTP request. Things starting with `<` are the response from the server.
 
 2. Use this [free online tool](https://www.hurl.it/). Select **GET** and copy paste `http://i.imgur.com/ncquuJb.jpg`.
-Clicking **Launch Request** will bring up the request and response.
+Clicking **Launch Request** will bring up the request and response. (The response will be shown when it loads.)
 
 With these open, hopefully I can demystify what is going on.
 
@@ -79,9 +79,13 @@ Stretching the letter analogy. `GET /ncquuJb.jpg HTTP/1.1` would be like writing
 The lines below the request line are your request headers.
 Think of them as a way to define variables for the server.
 
+
 A simple one is the header `HOST`.
-This names the server.
+This names the server, i.e. `HOST: i.imgur.com`.
 Combining the `HOST` with the `/ncquuJb.jpg` completes the full URL.
+
+If you are using hurl.it, you should see the header: `Accept: */*`.
+This header tells the server that you will accept all types of response.
 
 Another fun one is `User-Agent`.
 If you've ever been spooked by a website telling you what browser you're on, it's **because the browser tells the server!**
@@ -114,18 +118,18 @@ The first line of the HTTP response is the _status line_.
 `HTTP/1.1 200 OK`
 
 The server returns the protocol that it is using, then the **status code** and **reason phrase**.
-The reason phrase is used to make the status code readable by a person.
+The reason phrase is just the english version of the status code.
+In this case 200 means **OK**.
 Enjoy this list of [status codes matched with cat pictures.](http://boingboing.net/2011/12/14/http-status-cats-by-girliemac.html)
 
 Under the status line there are more headers.
-These are basically variables sent by the server to help your browser create the page.
+These are basically variables/instructions sent by the server to help your browser create the page.
 
 Finally the body is sent.
 This is the content that you want to view.
 The browser reads the response headers, and then displays the body in your browser.
 
-
-
+> TODO: write a simple tutorial in some nice language abusing these features.
 
 
 
