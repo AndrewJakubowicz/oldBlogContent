@@ -24,3 +24,5 @@ Things I like:
 
 > I have not failed. I've just found 10,000 ways that won't work. - Thomas Edison
 
+> A user interface is like a joke. If you have to explain it, it’s not that good. - Martin LeBlanc, Founder of Iconfinder
+
