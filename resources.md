@@ -15,7 +15,10 @@ Things I like:
 - [https://github.com/jbuberel/go-patterns](https://github.com/jbuberel/go-patterns)
     - Go patterns
 
-
+- [Fantastic talk to optimize Go Code](https://www.youtube.com/watch?v=ZuQcbqYK0BY)
+    - pprof
+    - testing
+    - benchmarking
 
 ### Quotes I like
 
