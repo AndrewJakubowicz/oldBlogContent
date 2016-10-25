@@ -1,0 +1,18 @@
+---
+layout: post
+title: Web server
+thumbnail: images/p1/cat_and_mouse.png
+myjs:
+  - libjs/anchor.min.js
+  - myjs/anchor_init.js
+---
+
+Help someone make an interesting program in golang (probably using c9.io)
+
+
+The Principle of Least Surprise.
+
+/hello
+vs
+/hello/
+
