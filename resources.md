@@ -26,3 +26,8 @@ Things I like:
 
 > A user interface is like a joke. If you have to explain it, it’s not that good. - Martin LeBlanc, Founder of Iconfinder
 
+
+
+### Blog posts I need to go through properly
+
+- [Organising database access (Go)](http://www.alexedwards.net/blog/organising-database-access)
